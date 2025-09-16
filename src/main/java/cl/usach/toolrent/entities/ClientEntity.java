@@ -17,7 +17,6 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String contact;
     private ClientState state;
     private String telephoneNumber;
     private String email;
