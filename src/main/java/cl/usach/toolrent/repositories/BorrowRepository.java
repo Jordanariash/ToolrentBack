@@ -17,4 +17,5 @@ public interface BorrowRepository extends JpaRepository<BorrowEntity, Long> {
     List<BorrowEntity> findByDate(Date borrowDate);
     List<BorrowEntity> findByResponsible(UserEntity responsible);
     List<BorrowEntity> findByClient(ClientEntity client);
+    List<BorrowEntity> findByBorrowState(BorrowEntity.BorrowState borrowState);
 }

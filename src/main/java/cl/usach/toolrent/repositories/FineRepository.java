@@ -13,7 +13,6 @@ import java.util.List;
 public interface FineRepository extends JpaRepository<FineEntity, Long> {
     public FineEntity findFineById(Long id);
     List<FineEntity> findByDelayDays(Integer delayDays);
-    List<FineEntity> findByDelayPayments(Integer delayPayments);
     List<FineEntity> findByAmount(Integer amount);
     List<FineEntity> findByFineType(FineEntity.FineType fineType);
     public FineEntity findByClient(ClientEntity client);

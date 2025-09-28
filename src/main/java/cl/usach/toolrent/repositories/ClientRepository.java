@@ -13,7 +13,6 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
     public List<ClientEntity> findByState(ClientEntity.ClientState state);
     public List<ClientEntity> findByTelephoneNumber(String telephoneNumber);
     public List<ClientEntity> findByEmail(String email);
-    public List<ClientEntity> findByCanBorrow(Boolean canBorrow);
 
     @Query(value =
             "SELECT clients.* " +

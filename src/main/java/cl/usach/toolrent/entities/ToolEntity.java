@@ -24,6 +24,8 @@ public class ToolEntity {
 
     private Integer replacementValue;
     private ToolState state;
+    private Integer dailyTariff;
+    private DamageLevel damageLevel;
 
 
 
@@ -41,5 +43,13 @@ public class ToolEntity {
         Cutting,    // Sierras
         Joining,    // Soldadores
         Measuring   // Cintas métricas
+    }
+
+    public enum DamageLevel {
+        NoDamage,
+        SmallDamage,
+        MediumDamage,
+        HighDamage,
+        Unusable
     }
 }

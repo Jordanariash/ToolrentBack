@@ -17,4 +17,6 @@ public interface ToolRepository extends JpaRepository<ToolEntity, Long> {
     List<ToolEntity> findByCategory(ToolCategory toolCategory);
     List<ToolEntity> findByreplacementValue(Integer replacementValue);
     List<ToolEntity> findByState(ToolEntity.ToolState state);
+    List<ToolEntity> findByDailyTariff(Integer dailyTariff);
+    List<ToolEntity> findByDamageLevel(ToolEntity.DamageLevel damageLevel);
 }

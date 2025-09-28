@@ -20,7 +20,6 @@ public class ClientEntity {
     private ClientState state;
     private String telephoneNumber;
     private String email;
-    private Boolean canBorrow;
     private ArrayList<ToolEntity> borrowedTools;
     private ArrayList<BorrowEntity> expiredBorrows;
     private ArrayList<FineEntity> unpaidFines;

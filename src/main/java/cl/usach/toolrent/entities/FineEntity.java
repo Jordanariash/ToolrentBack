@@ -16,8 +16,7 @@ public class FineEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int delayDays;
-    private int delayPayment;
-    private int amount;
+    private float amount;
     private FineType type;
 
     @ManyToOne
@@ -25,7 +24,8 @@ public class FineEntity {
     private ClientEntity client;
 
     public enum FineType {
-        Delay,      // Retraso
-        Damage    // Dalño
+        Delay,            // Retraso
+        Damage,           // Daño
+        DelayAndDamage    // Retraso y daño
     }
 }
