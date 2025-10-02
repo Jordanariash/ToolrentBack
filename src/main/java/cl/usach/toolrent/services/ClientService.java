@@ -24,12 +24,8 @@ public class ClientService {
         return clientRepository.findClientById(id);
     }
 
-    public ClientEntity addClient(ClientEntity client) {
-        return clientRepository.save(client);
-    }
-
-    public ClientEntity updateClient(ClientEntity client) {
-        return clientRepository.save(client);
+    public ArrayList<ClientEntity> getClientsByOverdue(){
+        return (ArrayList<ClientEntity>) clientRepository.findClientsWithOverdueBorrows();
     }
 
     public boolean checkClientExpiredBorrows(Long id){
@@ -45,6 +41,7 @@ public class ClientService {
         if(!checkClientExpiredBorrows(id) || !checkClientUnpaidFines(id)){
             clientRepository.findClientById(id).setState(ClientEntity.ClientState.Restricted);
         }
+        clientRepository.save(clientEntity);
     }//Cambia a estado restringido siguiendo los 2 criterios de prestamos y multas
 
     public void acquitClient(Long id){

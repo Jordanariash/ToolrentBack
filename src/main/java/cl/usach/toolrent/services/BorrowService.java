@@ -15,11 +15,20 @@ public class BorrowService {
     private BorrowRepository borrowRepository;
 
     //Llamar a servicios
+    @Autowired
     private ClientService clientService;
+    @Autowired
     private ToolService toolService;
+    @Autowired
     private UserService userService;
+    @Autowired
     private FineService fineService;
+    @Autowired
     private MoveService moveService;
+
+    public BorrowEntity getBorrowById(Long id){
+        return borrowRepository.findBorrowById(id);
+    }
 
     public int calculateAmount(ArrayList<Long> toolIds, Date borrowDate, Date returnDate){
         int days = fineService.calculateDays(borrowDate, returnDate);
@@ -63,6 +72,10 @@ public class BorrowService {
             }
         }
 
+        //Criterio, la herramienta debe arrendarse mas de 1 dia
+        if(fineService.calculateDays(Date.valueOf(LocalDate.now()), returnDate) < 1){
+            throw new RuntimeException("Borrows must be more than 1 day long");
+        }
 
 
         MoveEntity move = moveService.createMove();
@@ -70,7 +83,7 @@ public class BorrowService {
         move.setType(MoveEntity.MovementType.Borrow);
         move.setResponsible(userService.getUserById(userId));
         move.setQuantityAffected(tools.size());
-
+        moveService.saveMove(move);
 
 
         BorrowEntity borrow = new BorrowEntity();
@@ -150,7 +163,7 @@ public class BorrowService {
                 fine.setClient(borrow.getClient());
             }
         }
-        
+
 
 
 
@@ -159,11 +172,11 @@ public class BorrowService {
         move.setType(MoveEntity.MovementType.Return);
         move.setResponsible(userService.getUserById(userId));
         move.setQuantityAffected(borrowedTools.size());
-
+        moveService.saveMove(move);
 
         borrowRepository.findBorrowById(borrowId).setBorrowState(BorrowEntity.BorrowState.Returned);
         borrowRepository.save(borrowRepository.findBorrowById(borrowId));
-    } //pendiente move y fine y el cambio de funcion de calculateDays a fine
+    }
 
     public ArrayList<BorrowEntity> getActiveBorrows(){
         return (ArrayList<BorrowEntity>) borrowRepository.findByBorrowState(BorrowEntity.BorrowState.Active);

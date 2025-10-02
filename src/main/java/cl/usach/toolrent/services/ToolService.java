@@ -4,8 +4,6 @@ import cl.usach.toolrent.entities.ToolEntity;
 import cl.usach.toolrent.entities.UserEntity;
 import cl.usach.toolrent.repositories.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,12 +22,8 @@ public class ToolService {
         return toolRepository.findById(id).orElse(null);
     }
 
-    public ToolEntity addTool(ToolEntity tool){
-        return toolRepository.save(tool);
-    }
-
-    public ToolEntity updateTool(ToolEntity tool){
-        return toolRepository.save(tool);
+    public void addTool(ToolEntity tool){
+        toolRepository.save(tool);
     }
 
     public void deleteToolById(Long id, UserEntity user){
@@ -51,8 +45,11 @@ public class ToolService {
         Objects.requireNonNull(toolRepository.findById(selectedTool.getId()).orElse(null)).setState(state);
     }
 
-    public void changeReplacementValue(ToolEntity tool, Integer replacementValue){
+    public void changeReplacementValue(ToolEntity tool, Integer replacementValue, UserEntity user){
         ToolEntity selectedTool = getToolById(tool.getId());
+        if (user.getRole() != UserEntity.Role.Admin) {
+            throw new RuntimeException("Only admins can change replacement values");
+        }
         Objects.requireNonNull(toolRepository.findById(selectedTool.getId()).orElse(null)).setReplacementValue(replacementValue);
     }
 

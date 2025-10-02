@@ -19,7 +19,8 @@ public class KardexEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private ArrayList<StockEntity> stocks;
+    private ArrayList<MoveEntity> moves;
     private ArrayList<BorrowEntity> borrows;
-    private ArrayList<MoveEntity>  moves;
+    private ArrayList<ClientEntity> clients;
+    private ArrayList<StockEntity>  stocks;
 }

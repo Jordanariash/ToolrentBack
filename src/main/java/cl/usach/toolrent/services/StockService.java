@@ -1,8 +1,6 @@
 package cl.usach.toolrent.services;
-import cl.usach.toolrent.entities.MoveEntity;
-import cl.usach.toolrent.entities.StockEntity;
-import cl.usach.toolrent.entities.ToolCategory;
-import cl.usach.toolrent.entities.ToolEntity;
+import cl.usach.toolrent.entities.*;
+import cl.usach.toolrent.repositories.BorrowRepository;
 import cl.usach.toolrent.repositories.MoveRepository;
 import cl.usach.toolrent.repositories.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +10,16 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class StockService {
     @Autowired
     private StockRepository stockRepository;
+
+    @Autowired
+    private BorrowRepository borrowRepository;
+
     private ToolService toolService;
     private UserService userService;
     private MoveService moveService;
@@ -49,6 +50,25 @@ public class StockService {
         move.setType(MoveEntity.MovementType.Remove);
         move.setResponsible(userService.getUserById(userId));
         move.setQuantityAffected(1);
+
     }
 
+    public Map<ToolEntity, Integer> mostBorrowedTools(){
+        Map<ToolEntity, Integer> counter = new HashMap<>();
+        for(BorrowEntity borrow : borrowRepository.findAll()){
+            for(ToolEntity tool : borrow.getBorrowedTools()){
+                ToolCategory Category = tool.getCategory();
+                counter.put(tool, counter.getOrDefault(tool, 0) + 1);
+            }
+        }
+
+        return counter;
+    }
+
+    public List<Map.Entry<ToolEntity, Integer>> rankingTools(){
+        Map<ToolEntity, Integer> counter = new HashMap<>();
+        List<Map.Entry<ToolEntity, Integer>> ranking = new ArrayList<>(counter.entrySet());
+        ranking.sort((a, b)-> b.getValue().compareTo(a.getValue()));
+        return ranking;
+    }
 }

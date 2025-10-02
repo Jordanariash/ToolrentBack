@@ -37,11 +37,15 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
             "WHERE borrows.borrowed_tool_id = :toolId " +
             "AND borrows.returned = false",
             nativeQuery = true)
-    ClientEntity findClientByBorrowedTool(@Param("toolId") Long toolId);
+    ClientEntity findClientByBorrowedTool();
 
-
-
-
-
+    @Query(value =
+            "SELECT DISTINCT clients.* " +
+            "FROM clients " +
+            "JOIN borrows ON clients.id = borrows.client_id " +
+            "WHERE borrows.return_date < NOW() " +
+            "AND borrows.returned = false",
+            nativeQuery = true)
+    List<ClientEntity> findClientsWithOverdueBorrows();
 
 }

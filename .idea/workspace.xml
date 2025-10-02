@@ -5,23 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a62d972c-2b97-4002-9ec5-785581b231f1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/BorrowEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/BorrowEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ClientEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ClientEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/FineEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/FineEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/BorrowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/BorrowRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/KardexEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/KardexEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/FineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/FineRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/MoveRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/MoveRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ToolRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ToolRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/StockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/StockRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/BorrowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/BorrowService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/KardexService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/KardexService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/MoveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/MoveService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ToolService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ToolService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +143,12 @@
       <workItem from="1758643475469" duration="1166000" />
       <workItem from="1758647284080" duration="7804000" />
       <workItem from="1758976787138" duration="1036000" />
-      <workItem from="1758981104222" duration="30532000" />
+      <workItem from="1758981104222" duration="30605000" />
+      <workItem from="1759075216902" duration="310000" />
+      <workItem from="1759075680521" duration="10992000" />
+      <workItem from="1759156850732" duration="1207000" />
+      <workItem from="1759242555916" duration="13074000" />
+      <workItem from="1759354336697" duration="14781000" />
     </task>
     <servers />
   </component>

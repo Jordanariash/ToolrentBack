@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
-public interface MoveRepository extends JpaRepository<MoveRepository, Long> {
+public interface MoveRepository extends JpaRepository<MoveEntity, Long> {
     public MoveEntity findMoveById(Long id);
     List<MoveEntity> findByDate(Date date);
     List<MoveEntity> findByDateBetween(Date date1, Date date2);

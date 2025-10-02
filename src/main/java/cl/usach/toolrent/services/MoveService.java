@@ -1,4 +1,5 @@
 package cl.usach.toolrent.services;
+
 import cl.usach.toolrent.entities.MoveEntity;
 import cl.usach.toolrent.entities.ToolEntity;
 import cl.usach.toolrent.repositories.MoveRepository;
@@ -17,5 +18,8 @@ public class MoveService {
 
     public MoveEntity createMove(){
         return new MoveEntity();
+    }
+    public MoveEntity saveMove(MoveEntity move){
+        return moveRepository.save(move);
     }
 }
