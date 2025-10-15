@@ -16,6 +16,8 @@ public class ToolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private ToolType type;
 
     @ManyToOne
@@ -23,8 +25,13 @@ public class ToolEntity {
     private ToolCategory category;
 
     private Integer replacementValue;
+
+    @Enumerated(EnumType.STRING)
     private ToolState state;
+
     private Integer dailyTariff;
+
+    @Enumerated(EnumType.STRING)
     private DamageLevel damageLevel;
 
 

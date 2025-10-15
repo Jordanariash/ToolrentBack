@@ -1,4 +1,5 @@
 package cl.usach.toolrent.controllers;
+import cl.usach.toolrent.entities.ToolCategory;
 import cl.usach.toolrent.entities.ToolEntity;
 import cl.usach.toolrent.entities.UserEntity;
 import cl.usach.toolrent.services.ToolService;
@@ -11,39 +12,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tools")
+@RequestMapping("/tool")
 @CrossOrigin("*")
 public class ToolController {
     @Autowired
     ToolService toolService;
 
-    @GetMapping("")
+    @GetMapping("/availableTools")
     public ResponseEntity<List<ToolEntity>> getAvailableTools() {
         List<ToolEntity> tools = toolService.getAvailableTools();
         return ResponseEntity.ok(tools);
     }
+    @GetMapping("/availableAndCategoryTools")
+    public ResponseEntity<List<ToolEntity>> getAvailableToolsByCategory(ToolCategory toolCategory){
+        List<ToolEntity> tools = toolService.getAvailableToolsByCategory(toolCategory);
+        return ResponseEntity.ok(tools);
+    }
 
-    @PutMapping("")
-    public ResponseEntity<ToolEntity> changeState(ToolEntity tool, ToolEntity.ToolState toolState) {
-        toolService.changeState(tool, toolState);
+
+
+    @PutMapping("/borrow")
+    public ResponseEntity<ToolEntity> markAsBorrowed(Long toolId) {
+        toolService.markAsBorrowed(toolId);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping("/available")
+    public ResponseEntity<ToolEntity> markAsAvailable(Long toolId) {
+        toolService.markAsAvailable(toolId);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping("/repair")
+    public ResponseEntity<ToolEntity> markAsInRepair(Long toolId) {
+        toolService.markAsInRepair(toolId);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping("/out")
+    public ResponseEntity<ToolEntity> markAsOutOfService(Long toolId) {
+        toolService.markAsOutOfService(toolId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("")
-    public ResponseEntity<ToolEntity> changeReplacementValue(ToolEntity tool, Integer replacementValue, UserEntity user) {
-        toolService.changeReplacementValue(tool, replacementValue, user);
+
+    @PutMapping("/changeDamageLevel")
+    public ResponseEntity<ToolEntity> changeDamageLevel(Long toolId, ToolEntity.DamageLevel damageLevel){
+        toolService.changeDamageLevel(toolId, damageLevel);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping("/changeReplacementValue")
+    public ResponseEntity<ToolEntity> changeReplacementValue(Long toolId, Integer replacementValue, Long userId) {
+        toolService.changeReplacementValue(toolId, replacementValue, userId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("")
-    public ResponseEntity<ToolEntity> changeDailyTariff(ToolEntity tool,Integer dailyTariff, UserEntity user) {
-        toolService.changeDailyTariff(tool, dailyTariff, user);
+    @PutMapping("/changeDailyTariff")
+    public ResponseEntity<ToolEntity> changeDailyTariff(Long toolId,Integer dailyTariff, Long userId) {
+        toolService.changeDailyTariff(toolId, dailyTariff, userId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("")
-    public ResponseEntity<ToolEntity> changeDamageLevel(ToolEntity tool, ToolEntity.DamageLevel damageLevel){
-        toolService.changeDamageLevel(tool, damageLevel);
-        return ResponseEntity.ok().build();
-    }
 }

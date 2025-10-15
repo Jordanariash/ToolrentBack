@@ -1,3 +1,4 @@
+
 package cl.usach.toolrent.services;
 import cl.usach.toolrent.entities.FineEntity;
 import cl.usach.toolrent.repositories.FineRepository;
@@ -22,12 +23,8 @@ public class FineService {
     }
 
     public int calculateDays(Date startDate, Date endDate) {
-        long diffInMillies = endDate.getTime() - startDate.getTime();
-        return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-    }
-
-    public void createFine(FineEntity fine){
-        fineRepository.save(fine);
+        long diff = endDate.getTime() - startDate.getTime();
+        return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
 }

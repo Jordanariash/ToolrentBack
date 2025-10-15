@@ -1,68 +1,107 @@
 package cl.usach.toolrent.services;
 
+import cl.usach.toolrent.entities.ToolCategory;
 import cl.usach.toolrent.entities.ToolEntity;
 import cl.usach.toolrent.entities.UserEntity;
 import cl.usach.toolrent.repositories.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
 public class ToolService {
     @Autowired
     private ToolRepository toolRepository;
+    private UserService userService;
 
-    public ArrayList<ToolEntity>  getAllTools(){
-        return (ArrayList<ToolEntity>) toolRepository.findAll();
+
+    //Consultas
+    public List<ToolEntity> getAllTools(){
+        return toolRepository.findAll();
     }
 
     public ToolEntity getToolById(Long id){
-        return toolRepository.findById(id).orElse(null);
+        return toolRepository.findById(id).orElseThrow(() -> new RuntimeException("Tool not found with ID: " + id));
     }
 
-    public void addTool(ToolEntity tool){
+    public List<ToolEntity> getAvailableTools(){
+        return toolRepository.findByState(ToolEntity.ToolState.Available);
+    }
+
+    public List<ToolEntity> getAvailableToolsByCategory(ToolCategory toolCategory){
+        return  toolRepository.findByCategoryAndState(toolCategory, ToolEntity.ToolState.Available);
+    }
+
+
+
+    //Para cambiar el estado cuando se presta y devuelve
+    public void changeState(Long toolId, ToolEntity.ToolState newState){
+        ToolEntity tool = getToolById(toolId);
+        tool.setState(newState);
         toolRepository.save(tool);
     }
 
-    public void deleteToolById(Long id, UserEntity user){
-        if (user.getRole() != UserEntity.Role.Admin) {
-            throw new RuntimeException("Only admins can delete tools");
+    public void changeDamageLevel(Long toolId, ToolEntity.DamageLevel damageLevel){
+        ToolEntity tool = getToolById(toolId);
+        tool.setDamageLevel(damageLevel);
+        toolRepository.save(tool);
+    }
+
+
+
+
+    //Metodo intermediario para cambiar
+    public void markAsBorrowed(Long toolId) {
+        changeState(toolId, ToolEntity.ToolState.Borrowed);
+    }
+
+    public void markAsAvailable(Long toolId) {
+        changeState(toolId, ToolEntity.ToolState.Available);
+    }
+
+    public void markAsInRepair(Long toolId) {changeState(toolId, ToolEntity.ToolState.InRepair);}
+
+    public void markAsOutOfService(Long toolId) {changeState(toolId, ToolEntity.ToolState.OutOfService);}
+
+
+
+
+
+
+
+    public void changeReplacementValue(Long toolId, Integer replacementValue, Long userId){
+        if (userService.verifyAdmin(userId)){
+            ToolEntity selectedTool = getToolById(toolId);
+            String toolName = selectedTool.getName();
+            List<ToolEntity> tools = toolRepository.findByName(toolName);
+            for(ToolEntity tool : tools){
+                tool.setReplacementValue(replacementValue);
+            }
+        }else {
+            throw new RuntimeException("User is not admin");
         }
 
-        ToolEntity existing = getToolById(id);
-        existing.setState(ToolEntity.ToolState.OutOfService);
-        toolRepository.save(existing);
+
     }
 
-    public ArrayList<ToolEntity> getAvailableTools(){
-        return (ArrayList<ToolEntity>) toolRepository.findByState(ToolEntity.ToolState.Available);
-    }
-
-    public void changeState(ToolEntity tool, ToolEntity.ToolState state){
-        ToolEntity selectedTool = getToolById(tool.getId());
-        Objects.requireNonNull(toolRepository.findById(selectedTool.getId()).orElse(null)).setState(state);
-    }
-
-    public void changeReplacementValue(ToolEntity tool, Integer replacementValue, UserEntity user){
-        ToolEntity selectedTool = getToolById(tool.getId());
-        if (user.getRole() != UserEntity.Role.Admin) {
-            throw new RuntimeException("Only admins can change replacement values");
+    public void changeDailyTariff(Long toolId, Integer dailyTariff, Long userId) {
+        if (userService.verifyAdmin(userId)) {
+            ToolEntity selectedTool = getToolById(toolId);
+            String toolName = selectedTool.getName();
+            List<ToolEntity> tools = toolRepository.findByName(toolName);
+            for (ToolEntity tool : tools) {
+                tool.setDailyTariff(dailyTariff);
+            }
+        } else {
+            throw new RuntimeException("User is not admin");
         }
-        Objects.requireNonNull(toolRepository.findById(selectedTool.getId()).orElse(null)).setReplacementValue(replacementValue);
     }
 
-    public void changeDailyTariff(ToolEntity tool, Integer dailyTariff, UserEntity user){
-        ToolEntity selectedTool = getToolById(tool.getId());
-        if (user.getRole() != UserEntity.Role.Admin) {
-            throw new RuntimeException("Only admins can change daily tariff");
-        }
-        Objects.requireNonNull(toolRepository.findById(selectedTool.getId()).orElse(null)).setDailyTariff(dailyTariff);
-    }
 
-    public void changeDamageLevel(ToolEntity tool, ToolEntity.DamageLevel damageLevel){
-        ToolEntity selectedTool = getToolById(tool.getId());
-        Objects.requireNonNull(toolRepository.findById(selectedTool.getId()).orElse(null)).setDamageLevel(damageLevel);
-    }
+
+
+
+
 }

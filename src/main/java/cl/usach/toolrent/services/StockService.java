@@ -1,11 +1,10 @@
+
 package cl.usach.toolrent.services;
 import cl.usach.toolrent.entities.*;
 import cl.usach.toolrent.repositories.BorrowRepository;
 import cl.usach.toolrent.repositories.MoveRepository;
 import cl.usach.toolrent.repositories.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -18,13 +17,67 @@ public class StockService {
     private StockRepository stockRepository;
 
     @Autowired
-    private BorrowRepository borrowRepository;
-
     private ToolService toolService;
-    private UserService userService;
-    private MoveService moveService;
 
-    public void addTool(int quantity, ToolEntity tool, Long userId){
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private MoveService moveService;
+    @Autowired
+    private MoveRepository moveRepository;
+
+
+    public StockEntity getStockByToolId(Long id){
+        ToolEntity tool = toolService.getToolById(id);
+        if (tool == null) {
+            throw new RuntimeException("Tool not found with id: " + id);
+        }
+
+        // Busca el stock al que pertenece la categoría de la herramienta
+        StockEntity stock = stockRepository.findStockByToolCategory(tool.getCategory());
+        if (stock == null) {
+            throw new RuntimeException("Stock not found for tool category: " + tool.getCategory());
+        }
+
+        return stock;
+    }
+
+    public void addNewTool(int quantity, String name, ToolEntity.ToolType tooltype, ToolCategory toolCategory, Integer replacementValue, Integer dailyTariff, Long userId){
+        ToolEntity newTool = new ToolEntity();
+        newTool.setName(name);
+        newTool.setType(tooltype);
+        newTool.setCategory(toolCategory);
+        newTool.setReplacementValue(replacementValue);
+        newTool.setDailyTariff(dailyTariff);
+        newTool.setDamageLevel(ToolEntity.DamageLevel.NoDamage);
+        newTool.setState(ToolEntity.ToolState.Available);
+        StockEntity selectedStock = stockRepository.findStockByToolCategory(toolCategory);
+        for(int i = 0; i < quantity; i++){
+            ToolEntity addedTool = new ToolEntity();
+            addedTool.setName(newTool.getName());
+            addedTool.setType(newTool.getType());
+            addedTool.setCategory(newTool.getCategory());
+            addedTool.setReplacementValue(newTool.getReplacementValue());
+            addedTool.setState(ToolEntity.ToolState.Available);
+            addedTool.setDailyTariff(newTool.getDailyTariff());
+            addedTool.setDamageLevel(ToolEntity.DamageLevel.NoDamage);
+            selectedStock.getToolList().add(addedTool);
+        }
+
+        stockRepository.save(selectedStock);
+
+        MoveEntity move = moveService.createMove();
+        move.setDate(Date.valueOf(LocalDate.now()));
+        move.setType(MoveEntity.MovementType.Add);
+        move.setResponsible(userService.getUserById(userId));
+        move.setQuantityAffected(quantity);
+        moveService.saveMove(move);
+    }
+
+    public void addExistingTool(int quantity, Long toolId, Long userId){
+        ToolEntity tool = toolService.getToolById(toolId);
+        StockEntity selectedStock = stockRepository.findStockByToolCategory(tool.getCategory());
         for(int i = 0; i < quantity; i++){
             ToolEntity addedTool = new ToolEntity();
             addedTool.setName(tool.getName());
@@ -34,41 +87,116 @@ public class StockService {
             addedTool.setState(ToolEntity.ToolState.Available);
             addedTool.setDailyTariff(tool.getDailyTariff());
             addedTool.setDamageLevel(ToolEntity.DamageLevel.NoDamage);
-            toolService.addTool(addedTool);
+
+            selectedStock.getToolList().add(addedTool);
         }
+        stockRepository.save(selectedStock);
+
         MoveEntity move = moveService.createMove();
         move.setDate(Date.valueOf(LocalDate.now()));
         move.setType(MoveEntity.MovementType.Add);
         move.setResponsible(userService.getUserById(userId));
         move.setQuantityAffected(quantity);
+        moveService.saveMove(move);
     }
 
     public void removeTool(Long toolId, Long userId){
-        toolService.deleteToolById(toolId, userService.getUserById(userId));
+        if (!userService.verifyAdmin(userId)) {
+            throw new RuntimeException("User is not admin");
+        }
+
+        ToolEntity tool = toolService.getToolById(toolId);
+        if (tool == null) {
+            throw new RuntimeException("Tool not found");
+        }
+
+        StockEntity stock = stockRepository.findStockByToolCategory(tool.getCategory());
+        if (stock == null) {
+            throw new RuntimeException("No stock found for category: " + tool.getCategory());
+        }
+
+        boolean removed = stock.getToolList().removeIf(t -> Objects.equals(t.getId(), toolId));
+
+        if (!removed) {
+            throw new RuntimeException("Tool not found in stock");
+        }
+
+        stockRepository.save(stock);
+
         MoveEntity move = moveService.createMove();
         move.setDate(Date.valueOf(LocalDate.now()));
         move.setType(MoveEntity.MovementType.Remove);
         move.setResponsible(userService.getUserById(userId));
         move.setQuantityAffected(1);
-
+        moveService.saveMove(move);
     }
 
-    public Map<ToolEntity, Integer> mostBorrowedTools(){
-        Map<ToolEntity, Integer> counter = new HashMap<>();
-        for(BorrowEntity borrow : borrowRepository.findAll()){
-            for(ToolEntity tool : borrow.getBorrowedTools()){
-                ToolCategory Category = tool.getCategory();
-                counter.put(tool, counter.getOrDefault(tool, 0) + 1);
+    public void removeOutOfServiceTools(Long userId, ToolCategory toolCategory){
+        if (!userService.verifyAdmin(userId)) {
+            throw new RuntimeException("User is not admin");
+        }
+
+        StockEntity stock = stockRepository.findStockByToolCategory(toolCategory);
+        if (stock == null) {
+            throw new RuntimeException("No stock found for category: " + toolCategory);
+        }
+
+        List<ToolEntity> tools = stock.getToolList();
+        int initialSize = tools.size();
+
+        tools.removeIf(t -> t.getState() == ToolEntity.ToolState.OutOfService);
+        int removedCount = initialSize - tools.size();
+
+        if (removedCount > 0) {
+            stockRepository.save(stock);
+        }
+
+        MoveEntity move = moveService.createMove();
+        move.setDate(Date.valueOf(LocalDate.now()));
+        move.setType(MoveEntity.MovementType.Remove);
+        move.setResponsible(userService.getUserById(userId));
+        move.setQuantityAffected(removedCount);
+        moveService.saveMove(move);
+    }
+
+    public void removeAvailableTools(Long userId, ToolCategory toolCategory, Integer quantity){
+        if (!userService.verifyAdmin(userId)) {
+            throw new RuntimeException("User is not admin");
+        }
+
+        StockEntity stock = stockRepository.findStockByToolCategory(toolCategory);
+        if (stock == null) {
+            throw new RuntimeException("No stock found for category: " + toolCategory);
+        }
+
+        List<ToolEntity> availableTools = stock.getToolList().stream()
+                .filter(t -> t.getState() == ToolEntity.ToolState.Available)
+                .toList();
+
+        if (availableTools.size() < quantity) {
+            throw new RuntimeException("Not enough available tools in stock");
+        }
+
+        // Crear lista mutable para eliminar
+        List<ToolEntity> tools = stock.getToolList();
+        int removedCount = 0;
+
+        Iterator<ToolEntity> iterator = tools.iterator();
+        while (iterator.hasNext() && removedCount < quantity) {
+            ToolEntity t = iterator.next();
+            if (t.getState() == ToolEntity.ToolState.Available) {
+                iterator.remove();
+                removedCount++;
             }
         }
 
-        return counter;
-    }
+        stockRepository.save(stock);
 
-    public List<Map.Entry<ToolEntity, Integer>> rankingTools(){
-        Map<ToolEntity, Integer> counter = new HashMap<>();
-        List<Map.Entry<ToolEntity, Integer>> ranking = new ArrayList<>(counter.entrySet());
-        ranking.sort((a, b)-> b.getValue().compareTo(a.getValue()));
-        return ranking;
+        MoveEntity move = moveService.createMove();
+        move.setDate(Date.valueOf(LocalDate.now()));
+        move.setType(MoveEntity.MovementType.Remove);
+        move.setResponsible(userService.getUserById(userId));
+        move.setQuantityAffected(removedCount);
+        moveService.saveMove(move);
     }
 }

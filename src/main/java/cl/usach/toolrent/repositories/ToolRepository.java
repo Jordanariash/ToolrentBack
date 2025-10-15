@@ -11,12 +11,13 @@ import java.util.List;
 
 @Repository
 public interface ToolRepository extends JpaRepository<ToolEntity, Long> {
-    public ToolEntity findToolByid(Long id);
+    ToolEntity findToolById(Long id);
     List<ToolEntity> findByName(String name);
-    List<ToolEntity> findByToolType(ToolEntity.ToolType toolType);
+    List<ToolEntity> findByType(ToolEntity.ToolType toolType);
     List<ToolEntity> findByCategory(ToolCategory toolCategory);
     List<ToolEntity> findByreplacementValue(Integer replacementValue);
     List<ToolEntity> findByState(ToolEntity.ToolState state);
     List<ToolEntity> findByDailyTariff(Integer dailyTariff);
     List<ToolEntity> findByDamageLevel(ToolEntity.DamageLevel damageLevel);
+    List<ToolEntity> findByCategoryAndState(ToolCategory toolCategory, ToolEntity.ToolState state);
 }

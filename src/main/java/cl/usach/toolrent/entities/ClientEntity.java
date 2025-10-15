@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -17,12 +18,20 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     private ClientState state;
     private String telephoneNumber;
+
+    @Column(unique = true, nullable = false)
     private String email;
-    private ArrayList<ToolEntity> borrowedTools;
-    private ArrayList<BorrowEntity> expiredBorrows;
-    private ArrayList<FineEntity> unpaidFines;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BorrowEntity> borrows = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FineEntity> unpaidFines = new ArrayList<>();
 
     public enum ClientState {
         Allowed,      // Disponible

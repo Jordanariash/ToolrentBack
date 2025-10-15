@@ -11,5 +11,6 @@ import java.util.List;
 
 @Repository
 public interface StockRepository extends JpaRepository<StockEntity, Long> {
-    public StockEntity findStockByid(Long id);
+    StockEntity findStockById(Long id);
+    StockEntity findStockByToolCategory(ToolCategory toolCategory);
 }

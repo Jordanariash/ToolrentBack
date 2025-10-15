@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/borrow")
+@RequestMapping("/move")
 @CrossOrigin("*")
 public class MoveController {
     @Autowired
-    private MoveService moveService; //aqui tampoco iria nada, porque el move se crea desde borrow
+    private MoveService moveService;
 }

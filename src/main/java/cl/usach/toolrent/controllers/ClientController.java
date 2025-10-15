@@ -8,35 +8,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/client")
 @CrossOrigin("*")
 public class ClientController {
 
     @Autowired
     ClientService clientService;
 
-    @PostMapping("")
+    @GetMapping("/all")
     public ResponseEntity<List<ClientEntity>> getAllClients() {
         List<ClientEntity> allClients = clientService.getAllClients();
         return ResponseEntity.ok(allClients);
     }
 
-    @PostMapping("")
-    public ResponseEntity<List<ClientEntity>> getClientById(@RequestParam Long id) {
-        List<ClientEntity> clientsById = clientService.getAllClients();
-        return ResponseEntity.ok(clientsById);
+    @PostMapping("/{id}")
+    public ResponseEntity<ClientEntity> getClientById(@PathVariable Long id) {
+        ClientEntity client = clientService.getClientById(id);
+        return ResponseEntity.ok(client);
     }
 
-    @PutMapping("")
-    public ResponseEntity<ClientEntity> restrictClient(Long idClient){
-        clientService.restrictClient(idClient);
-        return ResponseEntity.ok(clientService.getClientById(idClient));
-    }
-
-    @PutMapping("")
-    public ResponseEntity<ClientEntity> acquitClient(Long idClient){
-        clientService.acquitClient(idClient);
-        return ResponseEntity.ok(clientService.getClientById(idClient));
+    @PutMapping("{id}/update")
+    public ResponseEntity<ClientEntity> updateClientState(@PathVariable Long id){
+        clientService.updateClientState(id);
+        return ResponseEntity.ok(clientService.getClientById(id));
     }
 
 }

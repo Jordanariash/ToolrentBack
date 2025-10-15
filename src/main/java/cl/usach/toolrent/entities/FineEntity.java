@@ -17,11 +17,17 @@ public class FineEntity {
     private Long id;
     private int delayDays;
     private float amount;
+
+    @Enumerated(EnumType.STRING)
     private FineType type;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private ClientEntity client;
+
+    @OneToOne
+    @JoinColumn(name = "borrow_id", nullable = false, unique = true)
+    private BorrowEntity borrow;
 
     public enum FineType {
         Delay,            // Retraso

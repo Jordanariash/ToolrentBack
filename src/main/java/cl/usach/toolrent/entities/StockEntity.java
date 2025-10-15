@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "stocks")
@@ -18,5 +19,13 @@ public class StockEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private ArrayList<ToolEntity> toolList;
+
+
+    @ManyToOne
+    @JoinColumn(name = "categoryId", nullable = false)
+    private ToolCategory toolCategory;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "stockId") // crea la FK en la tabla tools
+    private List<ToolEntity> toolList = new ArrayList<>();
 }

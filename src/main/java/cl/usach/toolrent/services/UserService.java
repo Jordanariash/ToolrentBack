@@ -14,6 +14,7 @@ import java.util.Objects;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    private UserService userService;
 
     public ArrayList<UserEntity> getAllUsers(){
         return (ArrayList<UserEntity>) userRepository.findAll();
@@ -31,4 +32,13 @@ public class UserService {
         return userRepository.findByRut(rut);
     }
 
+    public boolean verifyAdmin(Long userId) {
+        UserEntity user = getUserById(userId);
+        if (user.getRole() != UserEntity.Role.Admin) {
+            return false;
+
+        } else  {
+            return true;
+        }
+    }
 }

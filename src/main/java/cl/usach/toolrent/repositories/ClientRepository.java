@@ -37,7 +37,7 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
             "WHERE borrows.borrowed_tool_id = :toolId " +
             "AND borrows.returned = false",
             nativeQuery = true)
-    ClientEntity findClientByBorrowedTool();
+    ClientEntity findClientByBorrowedTool(@Param("toolId") Long toolId);
 
     @Query(value =
             "SELECT DISTINCT clients.* " +
@@ -47,5 +47,14 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
             "AND borrows.returned = false",
             nativeQuery = true)
     List<ClientEntity> findClientsWithOverdueBorrows();
+
+
+    // Obtener todos los clientes con préstamos activos
+    @Query(value =
+            "SELECT DISTINCT c.* FROM clients c " +
+                    "JOIN borrows b ON c.id = b.client_id " +
+                    "WHERE b.return_date IS NULL",
+            nativeQuery = true)
+    List<ClientEntity> findClientsWithActiveBorrows();
 
 }

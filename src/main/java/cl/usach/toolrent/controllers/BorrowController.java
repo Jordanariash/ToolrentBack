@@ -1,5 +1,6 @@
 package cl.usach.toolrent.controllers;
 import cl.usach.toolrent.entities.BorrowEntity;
+import cl.usach.toolrent.entities.ToolEntity;
 import cl.usach.toolrent.services.BorrowService;
 import cl.usach.toolrent.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,46 +11,66 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @RestController
 @RequestMapping("/borrow")
 @CrossOrigin("*")
 public class BorrowController {
 
     @Autowired
-    BorrowService borrowService;
+    private BorrowService borrowService;
 
-    /*
-    * Faltan los @ de los parametros
-    * @PathVariable ó
-     *@BodyRequest
-    * */
+    // Clase para recibir la información de un nuevo préstamo
+    public static class BorrowRequest {
+        public Long clientId;
+        public List<Long> toolIds;
+        public Long userId;
+        public Date returnDate;
+    }
 
-    @PostMapping("/")
-    public ResponseEntity<BorrowEntity> createBorrow(@RequestParam Long clientId,@RequestParam ArrayList<Long> toolIds,@RequestParam Long userId,@RequestParam Date returnDate) {
-        BorrowEntity newBorrow = borrowService.createBorrow(clientId, toolIds,userId, returnDate);
+    // Clase para recibir la información de la devolución
+    public static class ReturnRequest {
+        public Long borrowId;
+        public Date returnDate;
+        public Long userId;
+        public List<ToolEntity.DamageLevel> damages;
+    }
+
+
+    @PostMapping("/borrowTools")
+    public ResponseEntity<BorrowEntity> createBorrow(@RequestBody BorrowRequest request) {
+        BorrowEntity newBorrow = borrowService.createBorrow(
+                request.clientId,
+                request.toolIds,
+                request.userId,
+                request.returnDate
+        );
         return ResponseEntity.ok(newBorrow);
     }
 
-    @PutMapping("/")
-    public ResponseEntity<BorrowEntity> returnBorrow(@RequestParam Long borrowId,@RequestParam Date returnDate,@RequestParam  Long userId) {
-        borrowService.returnBorrow(borrowId,returnDate,userId);
-        return ResponseEntity.ok(borrowService.getBorrowById(borrowId));
+    @PutMapping("/returnTools")
+    public ResponseEntity<BorrowEntity> returnBorrow(@RequestBody ReturnRequest request) {
+        borrowService.returnBorrow(
+                request.borrowId,
+                request.returnDate,
+                request.userId,
+                new ArrayList<>(request.damages)
+        );
+        return ResponseEntity.ok(borrowService.getBorrowById(request.borrowId));
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<BorrowEntity>> getActiveBorrows(){
-        List<BorrowEntity> activeBorrows = borrowService.getActiveBorrows();
-        return ResponseEntity.ok(activeBorrows);
+    @GetMapping("/active")
+    public ResponseEntity<List<BorrowEntity>> getActiveBorrows() {
+        return ResponseEntity.ok(borrowService.getActiveBorrows());
     }
-    @GetMapping("/")
+    @GetMapping("/overdue")
     public ResponseEntity<List<BorrowEntity>> getOverdueBorrows(){
-        List<BorrowEntity> overdueBorrows = borrowService.getOverdueBorrows();
-        return ResponseEntity.ok(overdueBorrows);
+        return ResponseEntity.ok(borrowService.getOverdueBorrows());
     }
-    @GetMapping("/")
+    @GetMapping("/byClient")
     public ResponseEntity<List<BorrowEntity>> getBorrowsByClientId(@RequestParam Long clientId){
-        List<BorrowEntity> borrows = borrowService.getBorrowsByClientId(clientId);
-        return ResponseEntity.ok(borrows);
+        return ResponseEntity.ok(borrowService.getBorrowsByClientId(clientId));
     }
 
 }
