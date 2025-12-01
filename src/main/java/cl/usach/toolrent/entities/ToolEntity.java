@@ -22,7 +22,7 @@ public class ToolEntity {
 
     @ManyToOne
     @JoinColumn(name = "categoryId") // FK en la tabla tools
-    private ToolCategory category;
+    private ToolCategoryEntity category;
 
     private Integer replacementValue;
 
@@ -40,7 +40,8 @@ public class ToolEntity {
         Available,      // Disponible
         Borrowed,       // Prestada
         InRepair,       // En reparación
-        OutOfService    // Dada de baja
+        OutOfService,    // Dada de baja
+        Deleted         //Eliminacion logica
     }
 
     public enum ToolType {

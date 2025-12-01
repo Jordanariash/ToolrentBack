@@ -26,14 +26,24 @@ public class KardexService {
     public class Report{
         private List<BorrowEntity> activeBorrows;
         private List<BorrowEntity> overdueBorrows;
-        private Map<ToolEntity, Integer> rankedTools;
+        private List<Map.Entry<ToolEntity, Integer>> rankedTools;
 
-
-        public Report(List<BorrowEntity> activeBorrows, List<BorrowEntity> overdueBorrows, List<Map.Entry<ToolEntity, Integer>> entries) {
+        // Constructor corregido
+        public Report(List<BorrowEntity> activeBorrows, List<BorrowEntity> overdueBorrows, List<Map.Entry<ToolEntity, Integer>> rankedTools) {
             this.activeBorrows = activeBorrows;
             this.overdueBorrows = overdueBorrows;
             this.rankedTools = rankedTools;
         }
+
+        // Getters necesarios
+        public List<BorrowEntity> getActiveBorrows() { return activeBorrows; }
+        public List<BorrowEntity> getOverdueBorrows() { return overdueBorrows; }
+        public List<Map.Entry<ToolEntity, Integer>> getRankedTools() { return rankedTools; }
+    }
+
+    public Report generateReport(){
+        List<Map.Entry<ToolEntity, Integer>> ranking = rankingTools();
+        return new Report(borrowService.getActiveBorrows(), borrowService.getOverdueBorrows(), ranking);
     }
 
     public List<Map.Entry<ToolEntity, Integer>> rankingTools() {
@@ -43,9 +53,6 @@ public class KardexService {
         return ranking;
     }
 
-    public Report generateReport(){
-        return new Report(borrowService.getActiveBorrows(), borrowService.getOverdueBorrows(), rankingTools());
-    }
 
     //Es redundante, pero a nivel de logica moveS->kardexS>kardexC
     public List<MoveEntity> findMovesByToolIdAndDateRange(Long toolId, Date date1, Date date2){

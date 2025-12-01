@@ -3,7 +3,6 @@ package cl.usach.toolrent.repositories;
 import cl.usach.toolrent.entities.BorrowEntity;
 import cl.usach.toolrent.entities.ClientEntity;
 import cl.usach.toolrent.entities.FineEntity;
-import cl.usach.toolrent.entities.ToolCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,12 +11,13 @@ import java.util.List;
 
 @Repository
 public interface FineRepository extends JpaRepository<FineEntity, Long> {
-    public FineEntity findFineById(Long id);
     List<FineEntity> findByDelayDays(Integer delayDays);
     List<FineEntity> findByAmount(Float amount);
     List<FineEntity> findByType(FineEntity.FineType fineType);
     List<FineEntity> findByClient(ClientEntity client);
     List<FineEntity> findByBorrow(BorrowEntity borrow);
+    List<FineEntity> findByStatus(FineEntity.FineStatus status);
+    List<FineEntity> findByClientIdAndStatus(Long clientId, FineEntity.FineStatus status);
 
     @Query(value =
             "SELECT SUM(fines.amount) " +
@@ -32,4 +32,5 @@ public interface FineRepository extends JpaRepository<FineEntity, Long> {
                     "WHERE fines.type = :type",
             nativeQuery = true)
     Long countFinesByType(@Param("type") FineEntity.FineType type);
+
 }

@@ -16,30 +16,75 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/BorrowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/BorrowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/ClientController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/FineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/FineController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$AddExistingToolRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$AddExistingToolRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$AddNewToolRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$AddNewToolRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$RemoveAvailableToolsRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$RemoveAvailableToolsRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$RemoveOutOfServiceToolsRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$RemoveOutOfServiceToolsRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$RemoveToolRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController$RemoveToolRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/StockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/ToolController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/controllers/ToolController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ClientEntity$ClientState.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ClientEntity$ClientState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ClientEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ClientEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/FineEntity$FineType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/FineEntity$FineType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/FineEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/FineEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/StockEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/StockEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity$DamageLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity$DamageLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity$ToolState.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity$ToolState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity$ToolType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity$ToolType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/entities/ToolEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/BorrowRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/BorrowRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/ClientRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/ClientRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/FineRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/FineRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/MoveRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/MoveRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/StockRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/StockRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/ToolCategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/ToolCategoryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/ToolRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/repositories/ToolRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/BorrowService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/BorrowService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/BorrowService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/BorrowService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/ClientService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/FineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/FineService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/KardexService$Report.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/KardexService$Report.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/KardexService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/KardexService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/MoveService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/MoveService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/StockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/StockService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/ToolCategoyService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/ToolService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/ToolService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/cl/usach/toolrent/services/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BorrowService$1.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BorrowService.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockController$AddExistingToolRequest.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockController$AddNewToolRequest.class.uniqueId8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockController$RemoveAvailableToolsRequest.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockController$RemoveOutOfServiceToolsRequest.class.uniqueId9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockController$RemoveToolRequest.class.uniqueId10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockController.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StockService.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ToolRepository.class.uniqueId7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ToolService.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/BorrowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/BorrowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/FineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/FineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/KardexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/KardexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/MoveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/MoveController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/StockController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/ToolController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/ToolController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/BorrowEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/BorrowEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ClientEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ClientEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/FineEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/FineEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/KardexEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/MoveEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/MoveEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/StockEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/StockEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolCategoryEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/ToolEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/entities/UserEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/BorrowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/BorrowRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ClientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/FineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/FineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/KardexRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/MoveRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/MoveRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/StockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/StockRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ToolCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ToolCategoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ToolRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/ToolRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/BorrowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/BorrowService.java" afterDir="false" />
@@ -48,6 +93,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/KardexService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/KardexService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/MoveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/MoveService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ToolCategoyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ToolCategoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ToolService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/ToolService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/usach/toolrent/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
@@ -65,6 +111,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -107,12 +156,14 @@
   &quot;keyToString&quot;: {
     &quot;Gradle.Build ToolrentBack.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ToolrentBack [clean].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.ToolRentApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -132,7 +183,34 @@
       <recent name="cl.usach.toolrent.entities" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle clean" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ToolRentApplication">
+    <configuration name="ToolrentBack [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="ToolRentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="toolrent.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cl.usach.toolrent.ToolRentApplication" />
@@ -140,6 +218,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ToolrentBack [clean]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -196,7 +279,28 @@
       <workItem from="1760296267760" duration="34957000" />
       <workItem from="1760378103264" duration="14625000" />
       <workItem from="1760455570025" duration="3243000" />
-      <workItem from="1760482318467" duration="8979000" />
+      <workItem from="1760482318467" duration="9034000" />
+      <workItem from="1762550654516" duration="10243000" />
+      <workItem from="1762639155957" duration="6530000" />
+      <workItem from="1762755159312" duration="5341000" />
+      <workItem from="1762886845905" duration="4261000" />
+      <workItem from="1762994902562" duration="12830000" />
+      <workItem from="1763307034234" duration="4033000" />
+      <workItem from="1763485631177" duration="9012000" />
+      <workItem from="1763677151968" duration="1326000" />
+      <workItem from="1763772506292" duration="6894000" />
+      <workItem from="1763836830856" duration="6145000" />
+      <workItem from="1763900486371" duration="3785000" />
+      <workItem from="1763911590518" duration="15633000" />
+      <workItem from="1764031635702" duration="4019000" />
+      <workItem from="1764084201559" duration="16632000" />
+      <workItem from="1764152383661" duration="8919000" />
+      <workItem from="1764248784308" duration="7643000" />
+      <workItem from="1764326195923" duration="1371000" />
+      <workItem from="1764357539499" duration="2059000" />
+      <workItem from="1764431412778" duration="34520000" />
+      <workItem from="1764552719023" duration="8525000" />
+      <workItem from="1764563879436" duration="492000" />
     </task>
     <servers />
   </component>
@@ -213,6 +317,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

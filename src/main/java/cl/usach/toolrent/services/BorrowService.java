@@ -33,7 +33,7 @@ public class BorrowService {
     private FineRepository fineRepository;
 
     public BorrowEntity getBorrowById(Long id){
-        return borrowRepository.findBorrowById(id);
+        return borrowRepository.findById(id).orElseThrow(() -> new RuntimeException("Prestamo no encontrado con ID: " + id));
     }
 
     public int calculateAmount(List<Long> toolIds, Date borrowDate, Date returnDate){
@@ -117,17 +117,25 @@ public class BorrowService {
         borrow.setResponsible(user);
         borrow.setClient(client);
         borrow.setBorrowState(BorrowEntity.BorrowState.Active);
+
+        for(Long toolId : toolIds){
+            toolService.getToolById(toolId).setState(ToolEntity.ToolState.Borrowed);
+        }
+
         return borrowRepository.save(borrow);
     }
 
     public void returnBorrow(Long borrowId, Date returnDate, Long userId, ArrayList<ToolEntity.DamageLevel>  damages ) {
-        BorrowEntity borrow = borrowRepository.findBorrowById(borrowId);
+        BorrowEntity borrow = getBorrowById(borrowId);
         List<ToolEntity> borrowedTools = borrow.getBorrowedTools();
 
         float damageAmount = 0;
         int delayAmount = 0;
         boolean damaged = false;
-        for (int i = 0; i<borrowedTools.size(); i++){//ToolEntity tool : borrowedTools
+
+        //calcular tiempo
+        int delayDays = fineService.calculateDays(borrow.getReturnDate(), returnDate);
+        for (int i = 0; i<borrowedTools.size(); i++){
             //calcular daño
             switch (damages.get(i)){
                 case NoDamage:
@@ -159,20 +167,21 @@ public class BorrowService {
                     damaged = true;
                     break;
             }
-            //calcular tiempo
-            int delayDays = fineService.calculateDays(borrow.getReturnDate(), returnDate);
-            delayAmount = delayAmount + (borrowedTools.get(i).getDailyTariff() * delayDays);
-
+            if(delayDays>0){
+                delayAmount = delayAmount + (borrowedTools.get(i).getDailyTariff() * delayDays);
+            }
 
         }
 
         if(delayAmount == 0){
             if(damaged){ //sin atraso con daño
                 FineEntity fine = new FineEntity();
-                fine.setDelayDays(fineService.calculateDays(borrow.getReturnDate(), returnDate));
+                fine.setDelayDays(0);
+                //PORQUE SE CALCULA LA MULTA CON ESTO ,SI NO HAY RETRASO AAA
                 fine.setAmount(damageAmount);
                 fine.setType(FineEntity.FineType.Damage);
                 fine.setClient(borrow.getClient());
+                fine.setBorrow(borrow);
                 fineRepository.save(fine);
             }else{       //sin atraso sin daño
 
@@ -184,6 +193,7 @@ public class BorrowService {
                 fine.setAmount(damageAmount + delayAmount);
                 fine.setType(FineEntity.FineType.DelayAndDamage);
                 fine.setClient(borrow.getClient());
+                fine.setBorrow(borrow);
                 fineRepository.save(fine);
             }else{       //con atraso sin daño
                 FineEntity fine = new FineEntity();
@@ -191,6 +201,7 @@ public class BorrowService {
                 fine.setAmount(delayAmount);
                 fine.setType(FineEntity.FineType.Delay);
                 fine.setClient(borrow.getClient());
+                fine.setBorrow(borrow);
                 fineRepository.save(fine);
             }
         }
@@ -203,8 +214,14 @@ public class BorrowService {
         moveService.saveMove(move);
 
         borrow.setBorrowState(BorrowEntity.BorrowState.Returned);
+        borrow.setClientReturnDate(returnDate);
         borrowRepository.save(borrow);
 
+        clientService.restrictClient(borrow.getClient().getId());
+    }
+
+    public List<BorrowEntity> getAllBorrows(){
+        return borrowRepository.findAll();
     }
 
     public List<BorrowEntity> getActiveBorrows(){
@@ -215,6 +232,10 @@ public class BorrowService {
         return borrowRepository.findByBorrowState(BorrowEntity.BorrowState.Overdue);
     }
 
+    public List<BorrowEntity> getReturnedBorrows(){
+        return borrowRepository.findByBorrowState(BorrowEntity.BorrowState.Returned);
+    }
+
     public ArrayList<BorrowEntity> getBorrowsByClientId(Long clientId){
         return (ArrayList<BorrowEntity>) borrowRepository.findByClient(clientService.getClientById(clientId));
     }
@@ -223,7 +244,7 @@ public class BorrowService {
         Map<ToolEntity, Integer> counter = new HashMap<>();
         for(BorrowEntity borrow : borrowRepository.findAll()){
             for(ToolEntity tool : borrow.getBorrowedTools()){
-                ToolCategory Category = tool.getCategory();
+                ToolCategoryEntity Category = tool.getCategory();
                 counter.put(tool, counter.getOrDefault(tool, 0) + 1);
             }
         }

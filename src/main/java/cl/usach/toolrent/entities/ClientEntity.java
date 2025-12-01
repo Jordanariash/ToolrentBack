@@ -1,5 +1,6 @@
 package cl.usach.toolrent.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,11 +28,13 @@ public class ClientEntity {
     private String email;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<BorrowEntity> borrows = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FineEntity> unpaidFines = new ArrayList<>();
+    @JsonIgnore
+    private List<FineEntity> fines = new ArrayList<>();
 
     public enum ClientState {
         Allowed,      // Disponible

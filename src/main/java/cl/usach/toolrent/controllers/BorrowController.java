@@ -68,6 +68,11 @@ public class BorrowController {
     public ResponseEntity<List<BorrowEntity>> getOverdueBorrows(){
         return ResponseEntity.ok(borrowService.getOverdueBorrows());
     }
+    @GetMapping("/returned")
+    public ResponseEntity<List<BorrowEntity>> getReturnedBorrows() {
+        return ResponseEntity.ok(borrowService.getReturnedBorrows());
+    }
+
     @GetMapping("/byClient")
     public ResponseEntity<List<BorrowEntity>> getBorrowsByClientId(@RequestParam Long clientId){
         return ResponseEntity.ok(borrowService.getBorrowsByClientId(clientId));

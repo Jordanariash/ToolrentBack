@@ -23,9 +23,20 @@ public class StockEntity {
 
     @ManyToOne
     @JoinColumn(name = "categoryId", nullable = false)
-    private ToolCategory toolCategory;
+    private ToolCategoryEntity toolCategoryEntity;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "stockId") // crea la FK en la tabla tools
     private List<ToolEntity> toolList = new ArrayList<>();
+
+
+
+    private String baseToolName;
+
+    @Enumerated(EnumType.STRING)
+    private ToolEntity.ToolType baseToolType;
+
+    private Integer baseReplacementValue;
+    private Integer baseDailyTariff;
+
 }

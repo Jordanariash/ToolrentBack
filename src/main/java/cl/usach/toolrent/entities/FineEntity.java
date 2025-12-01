@@ -1,5 +1,6 @@
 package cl.usach.toolrent.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,11 @@ public class FineEntity {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnore
     private ClientEntity client;
+
+    @Enumerated(EnumType.STRING)
+    private FineStatus status = FineStatus.Unpaid;
 
     @OneToOne
     @JoinColumn(name = "borrow_id", nullable = false, unique = true)
@@ -33,5 +38,10 @@ public class FineEntity {
         Delay,            // Retraso
         Damage,           // Daño
         DelayAndDamage    // Retraso y daño
+    }
+
+    public enum FineStatus {
+        Unpaid,    // No pagada
+        Paid       // Pagada
     }
 }

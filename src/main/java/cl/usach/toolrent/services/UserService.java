@@ -16,12 +16,30 @@ public class UserService {
     private UserRepository userRepository;
     private UserService userService;
 
+    public UserEntity createUser(String rut, String name, String email, String password, UserEntity.Role role) {
+        if (userRepository.findByRut(rut) != null) {
+            throw new RuntimeException("El RUT ya está registrado: " + rut);
+        }
+        if (userRepository.findByEmail(email) != null) {
+            throw new RuntimeException("El email ya está registrado: " + email);
+        }
+
+        UserEntity newUser = new UserEntity();
+        newUser.setRut(rut);
+        newUser.setName(name);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+        newUser.setRole(role);
+
+        return userRepository.save(newUser);
+    }
+
     public ArrayList<UserEntity> getAllUsers(){
         return (ArrayList<UserEntity>) userRepository.findAll();
     }
 
     public UserEntity getUserById(Long id){
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
 
     public UserEntity getUserByEmail(String email){

@@ -33,4 +33,17 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getClientById(id));
     }
 
+
+
+
+    public static class CreateClientRequest {
+        public String email;
+        public String telephoneNumber;
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<ClientEntity> createClient(@RequestBody CreateClientRequest request) {
+        ClientEntity newClient = clientService.createClient(request.email, request.telephoneNumber);
+        return ResponseEntity.ok(newClient);
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface BorrowRepository extends JpaRepository<BorrowEntity, Long> {
-    BorrowEntity findBorrowById(Long id);
+
     List<BorrowEntity> findByCost(Integer cost);
 
     List<BorrowEntity> findByBorrowDate(Date borrowDate); //especifico

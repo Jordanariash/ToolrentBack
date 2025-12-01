@@ -1,19 +1,18 @@
 package cl.usach.toolrent.services;
 
-import cl.usach.toolrent.entities.ToolCategory;
+import cl.usach.toolrent.entities.ToolCategoryEntity;
 import cl.usach.toolrent.entities.ToolEntity;
-import cl.usach.toolrent.entities.UserEntity;
 import cl.usach.toolrent.repositories.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ToolService {
     @Autowired
     private ToolRepository toolRepository;
+    @Autowired
     private UserService userService;
 
 
@@ -30,8 +29,8 @@ public class ToolService {
         return toolRepository.findByState(ToolEntity.ToolState.Available);
     }
 
-    public List<ToolEntity> getAvailableToolsByCategory(ToolCategory toolCategory){
-        return  toolRepository.findByCategoryAndState(toolCategory, ToolEntity.ToolState.Available);
+    public List<ToolEntity> getAvailableToolsByCategory(ToolCategoryEntity toolCategoryEntity){
+        return  toolRepository.findByCategoryAndState(toolCategoryEntity, ToolEntity.ToolState.Available);
     }
 
 
@@ -46,6 +45,9 @@ public class ToolService {
     public void changeDamageLevel(Long toolId, ToolEntity.DamageLevel damageLevel){
         ToolEntity tool = getToolById(toolId);
         tool.setDamageLevel(damageLevel);
+        if(damageLevel== ToolEntity.DamageLevel.NoDamage){
+            changeState(toolId, ToolEntity.ToolState.Available);
+        }
         toolRepository.save(tool);
     }
 
@@ -64,10 +66,6 @@ public class ToolService {
     public void markAsInRepair(Long toolId) {changeState(toolId, ToolEntity.ToolState.InRepair);}
 
     public void markAsOutOfService(Long toolId) {changeState(toolId, ToolEntity.ToolState.OutOfService);}
-
-
-
-
 
 
 

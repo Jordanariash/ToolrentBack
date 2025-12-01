@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 
-//En este caso usuario contempla a admin y trabajadores separados por su funcion
 @Entity
 @Table(name = "users")
 @Data
