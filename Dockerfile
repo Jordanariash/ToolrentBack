@@ -6,7 +6,7 @@ COPY . .
 RUN gradle build -x test --no-daemon
 
 # Etapa de ejecución
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jre-alpine
 WORKDIR /app
 # Copia el JAR construido
 COPY --from=builder /app/build/libs/*.jar app.jar
