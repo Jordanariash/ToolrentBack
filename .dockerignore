@@ -1,0 +1,16 @@
+.gradle
+build
+bin
+*.log
+*.iml
+.idea
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.tar.gz
+.DS_Store
+docker-compose*.yml
+.git
+.gitignore
